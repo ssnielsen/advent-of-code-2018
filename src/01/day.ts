@@ -2,39 +2,39 @@ import fs from 'fs';
 import {Set} from 'immutable';
 
 const data = fs
-    .readFileSync('./src/01/input','utf8')
+    .readFileSync('./src/01/input', 'utf8')
     .split('\n')
     .filter(s => s.length > 0)
     .map(l => {
         const sign = l.substring(0, 1);
-        const number = parseInt(l.substring(1), 10);
+        const delta = parseInt(l.substring(1), 10);
         if (sign === '+' || sign === '-') {
             return {
                 sign,
-                number,
+                delta,
             };
         } else {
             throw Error(`First character should be a '+' or '-'. Found '${sign}'`);
         }
     });
 
-const change = (frequency: number, instruction: {sign: string, number: number}) => {
-    const {sign, number} = instruction;
+const change = (frequency: number, instruction: {sign: string, delta: number}) => {
+    const {sign, delta} = instruction;
 
     if (sign === '-') {
-        return frequency - number;
+        return frequency - delta;
     } else if (sign === '+') {
-        return frequency + number;
+        return frequency + delta;
     } else {
         return frequency;
     }
-}
+};
 
 export const part1 = () => {
     return data.reduce(change, 0);
 };
 
-function* cycleThrough<T>(array: Array<T>) {
+function* cycleThrough<T>(array: T[]) {
     let i = 0;
 
     while (true) {
@@ -47,7 +47,7 @@ export const part2 = () => {
     let heuristic = Set<number>();
     let frequency = 0;
 
-    for (var instruction of cycleThrough(data)) {
+    for (const instruction of cycleThrough(data)) {
         frequency = change(frequency, instruction);
 
         if (heuristic.has(frequency)) {
@@ -56,4 +56,4 @@ export const part2 = () => {
             heuristic = heuristic.add(frequency);
         }
     }
-}
+};
