@@ -1,0 +1,22 @@
+{
+    "name": "advent-of-code-2018",
+    "version": "1.0.0",
+    "description": "Advent of Code 2018 in TypeScript",
+    "main": "index.js",
+    "dependencies": {
+        "@types/node": "^10.12.11",
+        "immutable": "^4.0.0-rc.12"
+    },
+    "devDependencies": {
+        "nodemon": "^1.18.7",
+        "ts-node": "^7.0.1",
+        "typescript": "^3.2.1"
+    },
+    "scripts": {
+        "start": "ts-node ./src/app.ts",
+        "watch": "nodemon -e ts -w ./src -x npm run watch:serve",
+        "watch:serve": "ts-node --inspect -- ./src/app.ts"
+    },
+    "author": "ssnielsen (https://github.com/ssnielsen)",
+    "license": "ISC"
+}
