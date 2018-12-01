@@ -5,33 +5,10 @@ const data = fs
     .readFileSync('./src/01/input', 'utf8')
     .split('\n')
     .filter(s => s.length > 0)
-    .map(l => {
-        const sign = l.substring(0, 1);
-        const delta = parseInt(l.substring(1), 10);
-        if (sign === '+' || sign === '-') {
-            return {
-                sign,
-                delta,
-            };
-        } else {
-            throw Error(`First character should be a '+' or '-'. Found '${sign}'`);
-        }
-    });
+    .map(l => parseInt(l, 10));
 
-const change = (frequency: number, instruction: {sign: string, delta: number}) => {
-    const {sign, delta} = instruction;
-
-    if (sign === '-') {
-        return frequency - delta;
-    } else if (sign === '+') {
-        return frequency + delta;
-    } else {
-        return frequency;
-    }
-};
-
-export const part1 = () => {
-    return data.reduce(change, 0);
+const change = (frequency: number, delta: number) => {
+    return frequency + delta;
 };
 
 function* cycleThrough<T>(array: T[]) {
@@ -42,6 +19,10 @@ function* cycleThrough<T>(array: T[]) {
         i++;
     }
 }
+
+export const part1 = () => {
+    return data.reduce(change, 0);
+};
 
 export const part2 = () => {
     let heuristic = Set<number>();
