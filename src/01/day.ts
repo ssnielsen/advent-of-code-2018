@@ -15,16 +15,16 @@ function* cycleThrough<T>(array: T[]) {
     let i = 0;
 
     while (true) {
-        yield array[i % data.length];
+        yield array[i % array.length];
         i++;
     }
 }
 
-export const part1 = () => {
+export const part1 = (data: number[]) => {
     return data.reduce(change, 0);
 };
 
-export const part2 = () => {
+export const part2 = (data: number[]) => {
     let heuristic = Set<number>();
     let frequency = 0;
 
@@ -37,4 +37,9 @@ export const part2 = () => {
             heuristic = heuristic.add(frequency);
         }
     }
+};
+
+export const run = () => {
+    console.log(part1(data));
+    console.log(part2(data));
 };
