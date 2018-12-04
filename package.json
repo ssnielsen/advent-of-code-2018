@@ -17,7 +17,7 @@
         "typescript": "^3.2.1"
     },
     "scripts": {
-        "start": "concurrently \"tsc\" \"node src/app.js\"",
+        "start": "tsc && node src/app.js",
         "dev": "concurrently \"tsc -w\" \"nodemon src/app.js\"",
         "test": "jest",
         "test-watch": "jest --watch"
